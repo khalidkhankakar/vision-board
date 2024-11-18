@@ -1,4 +1,4 @@
-// CONFIGURATION
+// CONFIGURATION of the .env.local file
 import {z, ZodError} from "zod";
 
 const envSchema = z.object({
