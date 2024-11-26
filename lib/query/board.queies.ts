@@ -25,3 +25,12 @@ export const deleteBoard = (url: string) => fetch(url, { method: 'DELETE' }).the
 export const renameBoard = (url: string, { arg }: { arg: { title: string }}) => fetch(url, { 
     body: JSON.stringify({ title:arg.title }),
     method: 'PUT' }).then((res) => res.json());
+
+export const handleFavAndUnFav = (url: string, { arg }: { arg: { userId: string, boardId: string, orgId: string }}) => fetch(url, { 
+        body: JSON.stringify({
+             userId:arg.userId ,
+             boardId:arg.boardId,
+             orgId:arg.orgId
+
+}),
+        method: 'POST' }).then((res) => res.json().catch((e) => console.error(e)));

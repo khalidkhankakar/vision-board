@@ -4,6 +4,7 @@ import BoardCard from './board-card'
 import useSWR from 'swr';
 import { useOrganization } from '@clerk/nextjs';
 import NewBoard from './new-board';
+import { IBoard } from '@/lib/db/schemas/board';
 
 interface BoardListProps {
     searchParams: { search?: string, favorite?: string } | undefined
@@ -12,12 +13,12 @@ interface BoardListProps {
 const BoardList = ({ searchParams }: BoardListProps) => {
 
     const { search, favorite } = searchParams || {}
-    const { organization } = useOrganization()
 
+    const { organization } = useOrganization();
     // TODO: API call to get boards
     const { data, error, isLoading } = useSWR(`/api/board/${organization?.id}`, fetcher);
 
-    
+
     if (isLoading) {
         return (
             <div className='border-2 flex items-center justify-center border-black h-[calc(100vh-64px)]'>
@@ -50,7 +51,7 @@ const BoardList = ({ searchParams }: BoardListProps) => {
     }
 
 
-    if (!organization ||data?.data.length <= 0) {
+    if (!organization || data?.data.length <= 0) {
         return (
             <div className='border-2 flex items-center justify-center border-black h-[calc(100vh-64px)]'>
                 No Boards created yet
@@ -66,13 +67,14 @@ const BoardList = ({ searchParams }: BoardListProps) => {
                 <NewBoard />
                 {
                     data?.data?.map((board) => (<BoardCard
+                        key={board.id}
                         id={board.id}
                         authorName={board.authorName}
                         createdAt={board.createdAt}
-                        title={board.title}       
-                        key={board.id} 
-                        isFavorite={false}
-                        />))
+                        isFavorite={board.isFavorite}
+                        title={board.title}
+                        authorId={board.authorId}
+                    />))
                 }
             </div>
         </div>

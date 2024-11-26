@@ -1,15 +1,16 @@
+import { InferModel, relations } from "drizzle-orm";
 import {  index, pgTable, timestamp, uuid,varchar } from "drizzle-orm/pg-core";
-import {  createSelectSchema } from 'drizzle-zod';
+import {favorite} from ".";
 const board = pgTable(
     "board",
     {
-        id: uuid("id").defaultRandom().unique(),
+        id: uuid("id").defaultRandom().unique().notNull(),
         title: varchar("name").notNull(),
         orgId: varchar("org_id").notNull(),
         authorId: varchar("authorId").notNull(),
         authorName: varchar("authorName").notNull(),
-        createdAt: timestamp("created_at").defaultNow(),
-        updatedAt: timestamp("updated_at").defaultNow(),
+        createdAt: timestamp("created_at").defaultNow().notNull(),
+        updatedAt: timestamp("updated_at").defaultNow().notNull(),
     }
     , (t) => ({
         orgIdIdx: index("org_id_idx").on(t.orgId),
@@ -17,5 +18,12 @@ const board = pgTable(
     })
 );
 
-export const selectBoardSchema = createSelectSchema(board)
+export const boardRelations = relations(board, ({ many }) => ({
+    favorites: many(favorite),
+}))
+
+// type of board schema
+export type IBoard = InferModel<typeof board>; // Type for full table rows
+export type INewBoard = InferModel<typeof board, "insert">; // Type for insert operations
+
 export default board;

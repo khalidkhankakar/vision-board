@@ -1,16 +1,20 @@
-import { formatToShortDate } from '@/lib/utils'
-import { Star } from 'lucide-react'
+'use client'
 import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
 import CardMenuDropdown from './card-menu-dropdown'
+import BoardFooter from './board-footer'
+import { useAuth, useOrganization } from '@clerk/nextjs'
+import useSWRMutation from 'swr/mutation'
+import { handleFavAndUnFav } from '@/lib/query/board.queies'
+import { mutate } from 'swr'
+import { useState } from 'react'
 
 interface BoardCardProps {
   id: string
   authorName: string
-  createdAt: string
+  createdAt: Date
   title: string
   isFavorite: boolean
+  authorId: string
 }
 
 const BoardCard = ({
@@ -18,9 +22,30 @@ const BoardCard = ({
   authorName,
   createdAt,
   title,
+  authorId,
   isFavorite
 
 }: BoardCardProps) => {
+
+  const {userId} = useAuth()
+  const [isFav, setIsFav] = useState<boolean>(isFavorite)
+  const endPoint = isFav ? `api/board/unfavorite/${id}` : `api/board/favorite/${id}`
+  const { organization} = useOrganization()
+  const { trigger } = useSWRMutation(endPoint, handleFavAndUnFav)
+
+
+  const handleReaction = () => {
+    setIsFav((prev) => !prev)
+    if(!id || !userId || !organization) return
+    trigger({ userId, boardId: id, orgId: organization.id })
+    // TODO: show the toast
+    // .catch((e) => {console.error(e)
+    //   setIsFav(false)
+    // })
+    // .then(() => console.log('done'))
+    mutate(`api/board/${organization.id}`)
+  }
+
   return (
     <div className='group aspect-[5/5] pb-0 p-3 bg-blue-50 rounded-lg relative'>
       <Image src={'/board.svg'} width={100} height={100} alt="board" className='object-contain w-full' />
@@ -30,13 +55,18 @@ const BoardCard = ({
           id={id}
         />
       </div>
-      <div className=' flex justify-between my-3 mx-2 '>
-        <div>
-          <Link href={`/board/${id}`} className='text-black text-lg font-semibold hover:underline'>{title}</Link>
-          <p className='text-blue-500 text-sm'>{authorName} {formatToShortDate(createdAt)}</p>
-        </div>
-        <Star fill={isFavorite ? 'blue' : 'white'} className='stroke-1 stroke-blue-700 ' />
-      </div>
+
+      <BoardFooter
+
+        id={id}
+        title={title}
+        authorName={userId === authorId ? 'You':authorName}
+        createdAt={createdAt}
+        isFavorite={isFav}
+        handleClick={handleReaction}
+
+      />
+
     </div>
   )
 }
