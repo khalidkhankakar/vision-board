@@ -1,4 +1,3 @@
-
 import { db } from '@/lib/db/drizzle'
 import { board, favorite } from '@/lib/db/schemas'
 import { auth } from '@clerk/nextjs/server'
@@ -74,24 +73,43 @@ app.get('/board/:orgId', async (c) => {
   // create the board
   try {
     const orgId = c.req.param('orgId')
+    const search = c.req.query('search')
+    const favorite = c.req.query('favorite')
+    const { userId } = await auth();
+    let boards = []
+    if (search && search.length > 0 && search !== 'undefined') {
+      boards = await db.query.board.findMany({
+        where: and(eq(board.title, search), eq(board.orgId, orgId)),
+        orderBy: [desc(board.createdAt)],
+        with: { favorites: true }
+      })
+    } else {
+      boards = await db.query.board.findMany({
+        where: eq(board.orgId, orgId),
+        orderBy: [desc(board.createdAt)],
+        with: { favorites: true }
+      })
 
-    const boards = await db.query.board.findMany({
-      where: eq(board.orgId, orgId),
-      orderBy: [desc(board.createdAt)],
-      with: { favorites: true }
-    })
-    const { userId } = await auth()
+    }
 
+    let newBoards = [];
     // add isFavorite field to true if userId match to current user otherwise false 
-    const newBoards = boards.map((board) => {
-      // Check if the board has any favorite matching the userId
-      const isFavorite = board.favorites.some((favorite) => favorite.userId === userId);
-    
-      // Return the updated board object with the isFavorite flag
-      return { ...board, isFavorite };
-    });
+    if (favorite && favorite === 'true') {
+      newBoards = boards
+        .filter((board) => board.favorites.some((fav) => fav.userId === 'user_2p3i8AaNAB7gxsSgufHQ1wLcH4w'))
+        .map((board) => ({ ...board, isFavorite: true }));
 
-    // Also delete favroite relationship
+
+    } else {
+
+      newBoards = boards.map((board) => {
+        // Check if the board has any favorite matching the userId
+        const isFavorite = board.favorites.some((favorite) => favorite.userId === userId);
+        // Return the updated board object with the isFavorite flag
+        return { ...board, isFavorite };
+      });
+    }
+
 
 
     return NextResponse.json({ data: newBoards, message: 'Boards fetched' }, { status: 200 })
@@ -121,7 +139,7 @@ app.post('/board/favorite/:id', async (c) => {
   } catch (error) {
     console.error(error)
     throw Error('Something went wrong')
-    
+
   }
 })
 

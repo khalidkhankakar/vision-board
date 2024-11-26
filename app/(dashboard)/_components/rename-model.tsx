@@ -35,7 +35,17 @@ const RenameModel = () => {
         if (!organization || !initialValues.id) return;
         const result = await trigger({ title })
         console.log({ result })
-        mutate(`/api/board/${organization.id}`)
+        mutate((key) => {
+            // Match `/api/board/{organizationId}` with:
+            // 1. No query params
+            // 2. Only `search`
+            // 3. Only `favorites`
+            // 4. Both `search` and `favorites`
+            const pattern = new RegExp(
+              `^/api/board/${organization.id}($|\\?((search=.*&favorites=.*)|(favorites=.*&search=.*)|(search=.*)|(favorites=.*)))`
+            );
+            return pattern.test(key as string);
+          });
         onClose();
     }
 

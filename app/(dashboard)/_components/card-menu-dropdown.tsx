@@ -39,7 +39,17 @@ const CardMenuDropdown = ({ id, title }: CardMenuDropdownProps) => {
             const result = await trigger()
             console.log({ result })
             // Revalidate the cache for the board's data
-            mutate(`/api/board/${organization.id}`);
+            mutate((key) => {
+                // Match `/api/board/{organizationId}` with:
+                // 1. No query params
+                // 2. Only `search`
+                // 3. Only `favorites`
+                // 4. Both `search` and `favorites`
+                const pattern = new RegExp(
+                  `^/api/board/${organization.id}($|\\?((search=.*&favorites=.*)|(favorites=.*&search=.*)|(search=.*)|(favorites=.*)))`
+                );
+                return pattern.test(key as string);
+              });
         } catch (error) {
             console.error("Error deleting item:", error);
         }

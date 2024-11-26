@@ -1,4 +1,3 @@
-import React from 'react'
 import BoardList from './_components/board-list'
 
 type SearchParams =  Promise<{ search?:string, favorite?:string }>

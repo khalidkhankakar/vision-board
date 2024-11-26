@@ -7,6 +7,7 @@ import useSWRMutation from 'swr/mutation'
 import { handleFavAndUnFav } from '@/lib/query/board.queies'
 import { mutate } from 'swr'
 import { useState } from 'react'
+import { Skeleton } from '@/components/ui/skeleton'
 
 interface BoardCardProps {
   id: string
@@ -27,16 +28,16 @@ const BoardCard = ({
 
 }: BoardCardProps) => {
 
-  const {userId} = useAuth()
+  const { userId } = useAuth()
   const [isFav, setIsFav] = useState<boolean>(isFavorite)
   const endPoint = isFav ? `api/board/unfavorite/${id}` : `api/board/favorite/${id}`
-  const { organization} = useOrganization()
+  const { organization } = useOrganization()
   const { trigger } = useSWRMutation(endPoint, handleFavAndUnFav)
 
 
   const handleReaction = () => {
     setIsFav((prev) => !prev)
-    if(!id || !userId || !organization) return
+    if (!id || !userId || !organization) return
     trigger({ userId, boardId: id, orgId: organization.id })
     // TODO: show the toast
     // .catch((e) => {console.error(e)
@@ -60,7 +61,7 @@ const BoardCard = ({
 
         id={id}
         title={title}
-        authorName={userId === authorId ? 'You':authorName}
+        authorName={userId === authorId ? 'You' : authorName}
         createdAt={createdAt}
         isFavorite={isFav}
         handleClick={handleReaction}
@@ -72,3 +73,12 @@ const BoardCard = ({
 }
 
 export default BoardCard
+
+
+BoardCard.Skeleton = function BoardCardSkeleton() {
+  return (
+      <Skeleton className='group aspect-[5/5] bg-blue-50 rounded-lg relative' />
+  )
+}
+
+
