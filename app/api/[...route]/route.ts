@@ -1,10 +1,14 @@
-import { db } from '@/lib/db/drizzle'
-import { board, favorite } from '@/lib/db/schemas'
-import { auth } from '@clerk/nextjs/server'
+import { Liveblocks } from "@liveblocks/node";
 import { and, desc, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { handle } from 'hono/vercel'
 import { NextResponse } from 'next/server'
+import { auth, currentUser } from '@clerk/nextjs/server'
+
+import { db } from '@/lib/db/drizzle'
+import { board, favorite } from '@/lib/db/schemas'
+import { getBoard } from "@/lib/action";
+
 
 // export const runtime = 'edge'
 
@@ -162,6 +166,51 @@ app.post('/board/unfavorite/:id', async (c) => {
 })
 
 
+
+
+const liveblocks = new Liveblocks({
+  secret: "sk_prod_ZCNkX5Zo9UM0VUXecJfpudTFhKI2p28SzT0-X7HNfPW2jrobLXmk_sEP2GlKBKdh",
+});
+
+app.post('/liveblocks-auth', async (c) => {
+
+  const authorization = await auth();
+  const user = await currentUser();
+
+
+  if (!user || !authorization) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 403 })
+  }
+
+  const { room } = await c.req.json();
+
+  const singleBoard = await getBoard(room)
+
+  if (!singleBoard || singleBoard.orgId !== authorization.orgId) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 403 })
+  }
+
+  
+
+  const userInfo = {
+    name: user.firstName || 'Teammate',
+    picture: user.imageUrl
+  }
+
+  const session = liveblocks.prepareSession(
+    user.id,
+    { userInfo },
+  );
+
+
+  if (room) {
+    session.allow(room, session.FULL_ACCESS)
+  }
+
+  const { status, body } = await session.authorize();
+  return new Response(body, { status })
+
+})
 
 
 

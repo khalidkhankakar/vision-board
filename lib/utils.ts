@@ -1,4 +1,6 @@
+import { Camera } from "@/types/canvas";
 import { clsx, type ClassValue } from "clsx"
+import React from "react";
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
@@ -22,4 +24,22 @@ export function formatToShortDate(dateString:string) {
   
   // Custom format: `Fri 23, 02, 2024`
   return formattedDate.replace(/, /g, ', ');
+}
+
+
+const COLORS = [
+  "#05ffee",
+  "#ff052b",
+  "#fbff00",
+  "#d900ff",
+  "#1808ff",
+  "#ff0890",
+]
+
+export function connectionIdColor(id:number):string{
+  return COLORS[id % COLORS.length]
+}
+
+export const pointerEventToCameraPointer = (e:React.PointerEvent, cam:Camera)=>{
+  return {x: Math.round(e.clientX) - cam.x, y: Math.round(e.clientY) - cam.y}
 }

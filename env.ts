@@ -3,6 +3,7 @@ import {z, ZodError} from "zod";
 
 const envSchema = z.object({
     DATABASE_URL: z.string(),
+    LIVEBLOCKS_PUBLIC_API_KEY: z.string(),
 })
 
 export type Env = z.infer<typeof envSchema>

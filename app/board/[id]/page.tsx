@@ -1,16 +1,20 @@
+import Room from "@/components/shared/room"
+
+import Canvas from "../_components/canvas"
+import Loading from "../_components/loading"
 
 interface BoardProps {
-    params:Promise<{id:string}> 
+  params: Promise<{ id: string }>
 }
 
-const Board = async({params}:BoardProps) => {
+const Board = async ({ params }: BoardProps) => {
 
-    const boardId = (await params).id
-
+  const boardId = (await params).id
   return (
-    <div className="h-full w-full">
-      <h1 className="text-xl font-bold">boardId {boardId}</h1>
-    </div>
+    <Room id={boardId} fallback={<Loading />}>
+      <Canvas id={boardId} />
+    </Room>
+
   )
 }
 

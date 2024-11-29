@@ -8,6 +8,7 @@ import { handleFavAndUnFav } from '@/lib/query/board.queies'
 import { mutate } from 'swr'
 import { useState } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Ellipsis } from 'lucide-react'
 
 interface BoardCardProps {
   id: string
@@ -54,7 +55,11 @@ const BoardCard = ({
         <CardMenuDropdown
           title={title}
           id={id}
-        />
+        >
+          <button>
+            <Ellipsis />
+          </button>
+        </CardMenuDropdown>
       </div>
 
       <BoardFooter

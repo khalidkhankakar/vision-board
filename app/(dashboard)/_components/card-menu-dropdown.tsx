@@ -12,16 +12,17 @@ import {
 import { useRenameModel } from "@/hooks/use-rename-model";
 import { deleteBoard } from "@/lib/query/board.queies";
 import { useOrganization } from "@clerk/nextjs";
-import { Copy, Ellipsis, Pencil, Trash } from "lucide-react";
+import { Copy, Pencil, Trash } from "lucide-react";
 import { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
 
 interface CardMenuDropdownProps {
+    children: React.ReactNode
     id: string;
     title: string
 }
 
-const CardMenuDropdown = ({ id, title }: CardMenuDropdownProps) => {
+const CardMenuDropdown = ({ id, title,children }: CardMenuDropdownProps) => {
     const { organization } = useOrganization();
     const { onOpen } = useRenameModel()
     const { trigger } = useSWRMutation(`/api/board/${id}`, deleteBoard,)
@@ -58,9 +59,7 @@ const CardMenuDropdown = ({ id, title }: CardMenuDropdownProps) => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <button>
-                    <Ellipsis />
-                </button>
+               {children}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
