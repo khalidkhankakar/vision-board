@@ -28,6 +28,7 @@
     "drizzle-zod": "^0.5.1",
     "hono": "^4.6.11",
     "lucide-react": "^0.460.0",
+    "nanoid": "^5.0.9",
     "next": "15.0.3",
     "query-string": "^9.1.1",
     "react": "19.0.0-rc-66855b96-20241106",

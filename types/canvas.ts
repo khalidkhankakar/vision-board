@@ -38,6 +38,7 @@ export enum LayerType {
     Path,
     Note
 }
+export type Layer = RectangleLayer | EllipseLayer | TextLayer | PathLayer | NoteLayer
 
 export type RectangleLayer = {
     type: LayerType.Rectangle

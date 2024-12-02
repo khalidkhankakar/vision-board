@@ -6,6 +6,8 @@ import {
   RoomProvider,
   ClientSideSuspense,
 } from "@liveblocks/react/suspense";
+import { LiveList, LiveMap, LiveObject } from "@liveblocks/client";
+import { Layer } from "@/types/canvas";
 
 interface RoomProps{
     id:string,
@@ -22,7 +24,12 @@ const Room = ({
     <LiveblocksProvider 
     throttle={16}
     authEndpoint={'/api/liveblocks-auth'}>
-      <RoomProvider  initialPresence={{  cursor:null}} id={id}>
+      <RoomProvider
+        initialStorage={{
+        layers: new LiveMap<string, LiveObject<Layer>>(),
+        layerIds: new LiveList([]),
+        }}
+        initialPresence={{cursor:null, selection:[]}} id={id}>
         <ClientSideSuspense fallback={fallback}>
           {children}
         </ClientSideSuspense>
