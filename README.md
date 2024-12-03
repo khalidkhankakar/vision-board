@@ -1,4 +1,4 @@
-# 🎨 The Vision Board
+# 💻 The Vision Board
 
 A **real-time collaborative drawing application** that empowers organizations to create and collaborate on drawing boards, much like Figma! ✏️✨
 
