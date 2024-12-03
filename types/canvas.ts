@@ -106,7 +106,7 @@ export type CanvasState = | {
 }| {
     mode: CanvasMode.Resizing
     initialBounds: XYHW,
-    current: Side
+    cornor: Side
 }| {
     mode: CanvasMode.Pencil
 }
