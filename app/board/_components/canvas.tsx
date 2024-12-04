@@ -13,6 +13,7 @@ import Participants from './participants'
 import { LiveObject } from '@liveblocks/client';
 import LayerPreview from './layer-preview';
 import { SelectionBox } from './selection-box';
+import SelectionTools from './selection-tools';
 
 
 const MAX_LAYERS = 100
@@ -230,6 +231,12 @@ const Canvas = ({ id }: { id: string }) => {
     <div className='h-full w-full bg-slate-200 relative'>
       <Info id={id} />
       <Toolbar canvasState={canvasState} setCanvasState={setCanvasState} canRedo={canRedo} canUndo={canUndo} undo={history.undo} redo={history.redo} />
+
+      <SelectionTools
+        camera={camera}
+        setLastUsedColor={setLastUsedColor}
+      />
+
       <Participants />
       {/* by this when other people are in the room show in real time cursor presence */}
       <svg
