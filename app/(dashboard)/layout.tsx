@@ -3,9 +3,14 @@ import OrgSidebar from './_components/org-sidebar'
 import Navbar from './_components/navbar'
 import Sidebar from './_components/sidebar'
 import ModelProvider from '@/providers/model-provider'
+import { Metadata } from 'next'
 
 interface DashboardLayoutProps {
     children: React.ReactNode
+}
+export const metadata: Metadata = {
+    title:'Dashboard - Vision Board',
+    description:'Vision Board is team collaborative platform where you can create and manage boards for your team.'
 }
 
 const DashboardLayout = ({ children }: Readonly<DashboardLayoutProps>) => {

@@ -6,7 +6,7 @@ import { useOthersMapped, useStorage } from '@liveblocks/react/suspense'
 
 import { Camera, CanvasMode, CanvasState, Color, LayerType, Point, Side, XYHW, } from '@/types/canvas'
 import { CursorPresence } from './cursor-presence'
-import { connectionIdColor, pointerEventToCameraPointer, resizeBounds } from '@/lib/utils'
+import { connectionIdColor, findIntersectionlayerRectangle, pointerEventToCameraPointer, resizeBounds } from '@/lib/utils'
 import Info from './info'
 import Toolbar from './toolbar'
 import Participants from './participants'
@@ -87,6 +87,29 @@ const Canvas = ({ id }: { id: string }) => {
   }, [lastUsedColor])
 
 
+  const updateSelectionNet = useMutation(
+    ({ storage, setMyPresence }, current: Point, origin: Point) => {
+
+      const layers = storage.get('layers').toImmutable();
+      setCanvasState({
+        mode: CanvasMode.SelectionNet,
+        origin,
+        current
+      })
+
+      const ids = findIntersectionlayerRectangle(layerIds, layers, origin, current)
+      setMyPresence({ selection: ids })
+    }, [layerIds])
+
+  const startMultiSecltion = useCallback((current: Point, origin: Point) => {
+
+    if (Math.abs(current.x - origin.x) + Math.abs(current.y - origin.y) > 5) {
+
+      setCanvasState({ mode: CanvasMode.SelectionNet, origin, current });
+    }
+
+  }, [setCanvasState])
+
   const translateSelectedLayer = useMutation((
     { storage, self },
     point: Point
@@ -158,14 +181,20 @@ const Canvas = ({ id }: { id: string }) => {
   const onPointerMove = useMutation(({ setMyPresence }, e: React.PointerEvent) => {
     e.preventDefault();
     const current = pointerEventToCameraPointer(e, camera);
-    if (canvasState.mode === CanvasMode.Translating) {
+    if (canvasState.mode === CanvasMode.Pressing) {
+      startMultiSecltion(current, canvasState.origin)
+    } else if (canvasState.mode === CanvasMode.SelectionNet) {
+      updateSelectionNet(current, canvasState.origin)
+
+    }
+    else if (canvasState.mode === CanvasMode.Translating) {
       translateSelectedLayer(current)
     }
     else if (canvasState.mode === CanvasMode.Resizing) {
       resizeSelectedLayer(current)
     }
     setMyPresence({ cursor: current })
-  }, [canvasState, camera, resizeSelectedLayer, translateSelectedLayer])
+  }, [canvasState, camera, resizeSelectedLayer, translateSelectedLayer, updateSelectionNet])
 
 
   const onPoinerDown = useCallback((e: React.PointerEvent) => {
@@ -237,6 +266,8 @@ const Canvas = ({ id }: { id: string }) => {
         setLastUsedColor={setLastUsedColor}
       />
 
+
+
       <Participants />
       {/* by this when other people are in the room show in real time cursor presence */}
       <svg
@@ -265,6 +296,19 @@ const Canvas = ({ id }: { id: string }) => {
           <SelectionBox
             onResizeHandlePointerDown={onResizeHandlePointerDown}
           />
+          {
+            canvasState.mode == CanvasMode.SelectionNet && canvasState.current != null && (
+
+              <rect
+                className='fill-blue-500/5 stroke-blue-500 stroke-1'
+                x={Math.min(canvasState.origin.x, canvasState.current.x)}
+                y={Math.min(canvasState.origin.y, canvasState.current.y)}
+                width={Math.abs(canvasState.origin.x - canvasState.current.x)}
+                height={Math.abs(canvasState.origin.y - canvasState.current.y)}
+              />
+
+            )
+          }
 
           <CursorPresence />
         </g>
