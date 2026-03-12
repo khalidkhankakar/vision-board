@@ -1,4 +1,5 @@
 # 💻 The Vision Board
+<img width="1046" height="594" alt="image" src="https://github.com/user-attachments/assets/941693a0-d8ac-4e69-ab2c-f0ec1eb161f6" />
 
 A **real-time collaborative drawing application** that empowers organizations to create and collaborate on drawing boards, much like Figma! ✏️✨
 
