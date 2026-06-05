@@ -10,6 +10,7 @@ interface ColorPickerProps {
 export const ColorPicker = memo(({ onChange }: ColorPickerProps) => {
     return (
         <div className='flex max-w-[160px] flex-wrap gap-2'>
+            <ColorButton color={{ r: 0, g: 0, b: 0 }} onClick={onChange} />
             <ColorButton color={{ r: 24, g: 66,b: 82 }} onClick={onChange} />
             <ColorButton color={{ r: 28, g: 126,b: 110 }} onClick={onChange} />
             <ColorButton color={{ r: 222, g: 162,b: 70 }} onClick={onChange} />

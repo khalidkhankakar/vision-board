@@ -2,6 +2,9 @@ import { LayerType } from '@/types/canvas'
 import { useStorage } from '@liveblocks/react/suspense'
 import React from 'react'
 import RectangleLayerInsert from './rectangle-layer'
+import EllipseLayerInsert from './ellipse-layer'
+import TextLayerInsert from './text-layer'
+import NoteLayerInsert from './note-layer'
 
 interface LayerPreviewProps {
     id: string
@@ -22,11 +25,30 @@ const LayerPreview = ({id, onLayerPointerDown, selectionColor }: LayerPreviewPro
                 onPointerDown={onLayerPointerDown}
                 selectionColor={selectionColor}
             />
-
+        case LayerType.Ellipse:
+            return <EllipseLayerInsert
+                id={id}
+                layer={layer}
+                onPointerDown={onLayerPointerDown}
+                selectionColor={selectionColor}
+            />
+        case LayerType.Text:
+            return <TextLayerInsert
+                id={id}
+                layer={layer}
+                onPointerDown={onLayerPointerDown}
+                selectionColor={selectionColor}
+            />
+        case LayerType.Note:
+            return <NoteLayerInsert
+                id={id}
+                layer={layer}
+                onPointerDown={onLayerPointerDown}
+                selectionColor={selectionColor}
+            />
 
         default:
             return null
-            break;
     }
 }
 

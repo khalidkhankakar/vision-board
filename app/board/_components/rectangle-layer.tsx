@@ -24,8 +24,8 @@ const RectangleLayerInsert = ({ id, layer, onPointerDown, selectionColor }: Rect
             y={0}
             width={width}
             height={height}
-            strokeWidth={1}
-            fill={fill ? colorToCSS(fill):'#000'}
+            strokeWidth={selectionColor ? 2 : 1}
+            fill={fill ? colorToCSS(fill):'#e5e7eb'}
             stroke={selectionColor || 'transparent'}
 
         />

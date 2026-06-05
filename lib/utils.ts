@@ -59,12 +59,11 @@ export const resizeBounds = (bounds: XYHW, cornor: Side, point: Point): XYHW => 
 
   if ((cornor & Side.Left) === Side.Left) {
     result.x = Math.min(point.x, bounds.x + bounds.width)
-    result.width = Math.abs(point.x + bounds.width - point.x)
+    result.width = Math.abs(bounds.x + bounds.width - point.x)
   }
 
   if ((cornor & Side.Right) === Side.Right) {
-    result.x = Math.min(point.x, bounds.x)
-    result.width = Math.abs(point.x - point.x)
+    result.width = Math.abs(point.x - bounds.x)
   }
 
   if ((cornor & Side.Top) === Side.Top) {
@@ -73,8 +72,7 @@ export const resizeBounds = (bounds: XYHW, cornor: Side, point: Point): XYHW => 
   }
 
   if ((cornor & Side.Bottom) === Side.Bottom) {
-    result.y = Math.min(point.y, bounds.y)
-    result.height = Math.abs(point.y + bounds.y)
+    result.height = Math.abs(point.y - bounds.y)
   }
 
   return result

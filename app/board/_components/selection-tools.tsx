@@ -26,9 +26,12 @@ const SelectionTools = ({camera, setLastUsedColor}:SelectionToolsProps) => {
 
         const liveLayers = storage.get('layers');
         setLastUsedColor(fill)
-        selection.forEach((layerId)=>{
-            liveLayers.get(layerId)?.set('fill', fill)
-        })
+        for (const layerId of selection) {
+            const layer = liveLayers.get(layerId)
+            if (layer) {
+                layer.update({ fill })
+            }
+        }
 
     },[selection, setLastUsedColor])
     

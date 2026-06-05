@@ -26,7 +26,7 @@ const Canvas = ({ id }: { id: string }) => {
 
   const [camera, setCamera] = useState<Camera>({ x: 0, y: 0 })
 
-  const [lastUsedColor, setLastUsedColor] = useState<Color>({ r: 0, g: 0, b: 0 })
+  const [lastUsedColor, setLastUsedColor] = useState<Color>({ r: 229, g: 231, b: 235 })
 
   const history = useHistory()
   const canUndo = useCanUndo()

@@ -23,9 +23,12 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
     return (
         <>
             <rect
-                className='full-transparent stroke-blue-500 start-1 pointer-events-none'
+                className='pointer-events-none'
                 style={{
-                    transform: `translate(${bounds.x}px, ${bounds.y}px)`
+                    transform: `translate(${bounds.x}px, ${bounds.y}px)`,
+                    fill: 'none',
+                    stroke: '#3b82f6',
+                    strokeWidth: '2'
                 }}
                 y={0}
                 x={0}
@@ -37,15 +40,16 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
                 <>
                     {/* 1 */}
                     <rect
-                        className='fill-white stroke-1 stroke-blue-500 '
                         x={0}
                         y={0}
                         style={{
                             cursor: 'nwse-resize',
                             width: `${HANDLE_WIDTH}px`,
                             height: `${HANDLE_WIDTH}px`,
-                            transform: `translate(${bounds.x - HANDLE_WIDTH / 2}px, ${bounds.y - HANDLE_WIDTH / 2}px)`
-
+                            transform: `translate(${bounds.x - HANDLE_WIDTH / 2}px, ${bounds.y - HANDLE_WIDTH / 2}px)`,
+                            fill: 'white',
+                            stroke: '#3b82f6',
+                            strokeWidth: '1'
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation()
@@ -54,15 +58,16 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
                     />
                     {/* 2 */}
                     <rect
-                        className='fill-white stroke-1 stroke-blue-500 '
                         x={0}
                         y={0}
                         style={{
                             cursor: 'ns-resize',
                             width: `${HANDLE_WIDTH}px`,
                             height: `${HANDLE_WIDTH}px`,
-                            transform: `translate(${bounds.x + bounds.width / 2 - HANDLE_WIDTH / 2}px, ${bounds.y - HANDLE_WIDTH / 2}px)`
-
+                            transform: `translate(${bounds.x + bounds.width / 2 - HANDLE_WIDTH / 2}px, ${bounds.y - HANDLE_WIDTH / 2}px)`,
+                            fill: 'white',
+                            stroke: '#3b82f6',
+                            strokeWidth: '1'
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation()
@@ -71,15 +76,16 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
                     />
                     {/* 3 */}
                     <rect
-                        className='fill-white stroke-1 stroke-blue-500 '
                         x={0}
                         y={0}
                         style={{
                             cursor: 'nesw-resize',
                             width: `${HANDLE_WIDTH}px`,
                             height: `${HANDLE_WIDTH}px`,
-                            transform: `translate(${bounds.x + bounds.width - HANDLE_WIDTH / 2}px, ${bounds.y - HANDLE_WIDTH / 2}px)`
-
+                            transform: `translate(${bounds.x + bounds.width - HANDLE_WIDTH / 2}px, ${bounds.y - HANDLE_WIDTH / 2}px)`,
+                            fill: 'white',
+                            stroke: '#3b82f6',
+                            strokeWidth: '1'
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation()
@@ -89,15 +95,16 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
                     />
                     {/* 4 */}
                     <rect
-                        className='fill-white stroke-1 stroke-blue-500 '
                         x={0}
                         y={0}
                         style={{
                             cursor: 'ew-resize',
                             width: `${HANDLE_WIDTH}px`,
                             height: `${HANDLE_WIDTH}px`,
-                            transform: `translate(${bounds.x + bounds.width - HANDLE_WIDTH / 2}px, ${bounds.y + bounds.height / 2 - HANDLE_WIDTH / 2}px)`
-
+                            transform: `translate(${bounds.x + bounds.width - HANDLE_WIDTH / 2}px, ${bounds.y + bounds.height / 2 - HANDLE_WIDTH / 2}px)`,
+                            fill: 'white',
+                            stroke: '#3b82f6',
+                            strokeWidth: '1'
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation()
@@ -107,15 +114,16 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
                     />
                     {/* 5 */}
                     <rect
-                        className='fill-white stroke-1 stroke-blue-500 '
                         x={0}
                         y={0}
                         style={{
                             cursor: 'nwse-resize',
                             width: `${HANDLE_WIDTH}px`,
                             height: `${HANDLE_WIDTH}px`,
-                            transform: `translate(${bounds.x - HANDLE_WIDTH / 2 + bounds.width}px, ${bounds.y - HANDLE_WIDTH / 2 + bounds.height}px)`
-
+                            transform: `translate(${bounds.x - HANDLE_WIDTH / 2 + bounds.width}px, ${bounds.y - HANDLE_WIDTH / 2 + bounds.height}px)`,
+                            fill: 'white',
+                            stroke: '#3b82f6',
+                            strokeWidth: '1'
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation()
@@ -124,15 +132,16 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
                     />
                     {/* 6 */}
                     <rect
-                        className='fill-white stroke-1 stroke-blue-500 '
                         x={0}
                         y={0}
                         style={{
                             cursor: 'ns-resize',
                             width: `${HANDLE_WIDTH}px`,
                             height: `${HANDLE_WIDTH}px`,
-                            transform: `translate(${bounds.x - bounds.width / 2 + bounds.width}px, ${bounds.y - HANDLE_WIDTH / 2 + bounds.height}px)`
-
+                            transform: `translate(${bounds.x - bounds.width / 2 + bounds.width}px, ${bounds.y - HANDLE_WIDTH / 2 + bounds.height}px)`,
+                            fill: 'white',
+                            stroke: '#3b82f6',
+                            strokeWidth: '1'
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation()
@@ -144,15 +153,16 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
                    
                     {/* 7 */}
                     <rect
-                        className='fill-white stroke-1 stroke-blue-500 '
                         x={0}
                         y={0}
                         style={{
                             cursor: 'nesw-resize',
                             width: `${HANDLE_WIDTH}px`,
                             height: `${HANDLE_WIDTH}px`,
-                            transform: `translate(${bounds.x - HANDLE_WIDTH / 2}px, ${bounds.y - HANDLE_WIDTH / 2 + bounds.height}px)`
-
+                            transform: `translate(${bounds.x - HANDLE_WIDTH / 2}px, ${bounds.y - HANDLE_WIDTH / 2 + bounds.height}px)`,
+                            fill: 'white',
+                            stroke: '#3b82f6',
+                            strokeWidth: '1'
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation()
@@ -161,15 +171,16 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
                     />
                     {/* 8 */}
                     <rect
-                        className='fill-white stroke-1 stroke-blue-500 '
                         x={0}
                         y={0}
                         style={{
                             cursor: 'ew-resize',
                             width: `${HANDLE_WIDTH}px`,
                             height: `${HANDLE_WIDTH}px`,
-                            transform: `translate(${bounds.x - HANDLE_WIDTH / 2}px, ${bounds.y - HANDLE_WIDTH / 2 + bounds.height / 2}px)`
-
+                            transform: `translate(${bounds.x - HANDLE_WIDTH / 2}px, ${bounds.y - HANDLE_WIDTH / 2 + bounds.height / 2}px)`,
+                            fill: 'white',
+                            stroke: '#3b82f6',
+                            strokeWidth: '1'
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation()
