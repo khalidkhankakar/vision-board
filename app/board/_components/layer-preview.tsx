@@ -5,6 +5,7 @@ import RectangleLayerInsert from './rectangle-layer'
 import EllipseLayerInsert from './ellipse-layer'
 import TextLayerInsert from './text-layer'
 import NoteLayerInsert from './note-layer'
+import PathLayerInsert from './path-layer'
 
 interface LayerPreviewProps {
     id: string
@@ -18,6 +19,13 @@ const LayerPreview = ({id, onLayerPointerDown, selectionColor }: LayerPreviewPro
     if (!layer) return null
 
     switch (layer?.type) {
+        case LayerType.Path:
+            return <PathLayerInsert
+                id={id}
+                layer={layer}
+                onPointerDown={onLayerPointerDown}
+                selectionColor={selectionColor}
+            />
         case LayerType.Rectangle:
             return <RectangleLayerInsert
                 id={id}

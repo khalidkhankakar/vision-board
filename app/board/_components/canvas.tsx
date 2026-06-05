@@ -1,12 +1,12 @@
 'use client';
 import { nanoid } from 'nanoid'
 import React, { useCallback, useMemo, useState } from 'react'
-import { useCanRedo, useCanUndo, useHistory, useMutation } from '@liveblocks/react'
+import { useCanRedo, useCanUndo, useHistory, useMutation, useSelf } from '@liveblocks/react'
 import { useOthersMapped, useStorage } from '@liveblocks/react/suspense'
 
 import { Camera, CanvasMode, CanvasState, Color, LayerType, Point, Side, XYHW, } from '@/types/canvas'
 import { CursorPresence } from './cursor-presence'
-import { connectionIdColor, findIntersectionlayerRectangle, pointerEventToCameraPointer, resizeBounds } from '@/lib/utils'
+import { colorToCSS, connectionIdColor, findIntersectionlayerRectangle, getSvgPathFromStroke, penPointsToPathLayer, pointerEventToCameraPointer, resizeBounds } from '@/lib/utils'
 import Info from './info'
 import Toolbar from './toolbar'
 import Participants from './participants'
@@ -34,6 +34,8 @@ const Canvas = ({ id }: { id: string }) => {
 
 
   const selections = useOthersMapped((other) => other.presence.selection)
+
+  const pencilDraft = useSelf((me) => me.presence.pencilDraft)
 
   const layerIdsColorSelection = useMemo(() => {
     const layerIdsColorSelection: Record<string, string> = {}
@@ -110,6 +112,49 @@ const Canvas = ({ id }: { id: string }) => {
 
   }, [setCanvasState])
 
+  const startDrawing = useMutation(({ setMyPresence }, point: Point, pressure: number) => {
+    setMyPresence({
+      pencilDraft: [[point.x, point.y, pressure]],
+      penColor: lastUsedColor
+    })
+  }, [lastUsedColor])
+
+  const continueDrawing = useMutation(({ self, setMyPresence }, point: Point, e: React.PointerEvent) => {
+    const { pencilDraft } = self.presence;
+
+    if (canvasState.mode !== CanvasMode.Pencil || e.buttons !== 1 || pencilDraft == null) return;
+
+    setMyPresence({
+      cursor: point,
+      pencilDraft: pencilDraft.length > 0 && pencilDraft[pencilDraft.length - 1][0] === point.x && pencilDraft[pencilDraft.length - 1][1] === point.y ? pencilDraft : [...pencilDraft, [point.x, point.y, e.pressure]]
+    })
+
+  }, [canvasState.mode])
+
+  const insertPath = useMutation(({ storage, self, setMyPresence }) => {
+    const liveLayers = storage.get('layers')
+    const { pencilDraft } = self.presence;
+
+    if (pencilDraft == null || pencilDraft.length < 2 || liveLayers.size >= MAX_LAYERS) {
+      setMyPresence({ pencilDraft: null })
+      return;
+    }
+
+    const id = nanoid();
+
+    liveLayers.set(
+      id,
+      new LiveObject(penPointsToPathLayer(pencilDraft, lastUsedColor))
+    )
+
+    const liveLayerIds = storage.get('layerIds')
+    liveLayerIds.push(id)
+
+    setMyPresence({ pencilDraft: null })
+    setCanvasState({ mode: CanvasMode.Pencil })
+
+  }, [lastUsedColor])
+
   const translateSelectedLayer = useMutation((
     { storage, self },
     point: Point
@@ -149,6 +194,9 @@ const Canvas = ({ id }: { id: string }) => {
       setCanvasState({ mode: CanvasMode.None })
 
     }
+    else if (canvasState.mode === CanvasMode.Pencil) {
+      insertPath()
+    }
     else if (canvasState.mode === CanvasMode.Inserting) {
       insertLayer(canvasState.layerType, point)
     }
@@ -156,7 +204,7 @@ const Canvas = ({ id }: { id: string }) => {
       setCanvasState({ mode: CanvasMode.None })
     }
     history.resume()
-  }, [camera, canvasState, history, insertLayer])
+  }, [camera, canvasState, history, insertLayer, insertPath])
 
   const resizeSelectedLayer = useMutation((
     { storage, self },
@@ -193,22 +241,28 @@ const Canvas = ({ id }: { id: string }) => {
     else if (canvasState.mode === CanvasMode.Resizing) {
       resizeSelectedLayer(current)
     }
+    else if (canvasState.mode === CanvasMode.Pencil) {
+      continueDrawing(current, e)
+    }
     setMyPresence({ cursor: current })
-  }, [canvasState, camera, resizeSelectedLayer, translateSelectedLayer, updateSelectionNet])
+  }, [canvasState, camera, resizeSelectedLayer, translateSelectedLayer, updateSelectionNet, continueDrawing])
 
 
   const onPoinerDown = useCallback((e: React.PointerEvent) => {
     const point = pointerEventToCameraPointer(e, camera)
     if (canvasState.mode === CanvasMode.Inserting) return;
 
-    // TODO: add case for drawing the pencil
+    if (canvasState.mode === CanvasMode.Pencil) {
+      startDrawing(point, e.pressure)
+      return;
+    }
 
     setCanvasState({
       mode: CanvasMode.Pressing,
       origin: point
     })
 
-  }, [camera, canvasState.mode, setCanvasState])
+  }, [camera, canvasState.mode, setCanvasState, startDrawing])
 
   const onWheel = useCallback((e: React.WheelEvent) => {
     e.preventDefault();
@@ -311,6 +365,12 @@ const Canvas = ({ id }: { id: string }) => {
           }
 
           <CursorPresence />
+          {pencilDraft != null && pencilDraft.length > 0 && (
+            <path
+              fill={colorToCSS(lastUsedColor)}
+              d={getSvgPathFromStroke(pencilDraft)}
+            />
+          )}
         </g>
       </svg>
     </div>
