@@ -22,8 +22,8 @@ const Toolbar = ({
   canRedo
 }: ToolbarProps) => {
   return (
-    <div className='absolute top-[30%] flex flex-col  left-2 space-y-2 py-2 px-4'>
-      <div className="bg-white rounded-md flex p-1 flex-col gap-y-1 items-center ">
+    <div className='absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 gap-2 px-3 sm:bottom-auto sm:left-3 sm:top-1/2 sm:-translate-x-0 sm:-translate-y-1/2 sm:flex-col sm:px-0'>
+      <div className="flex items-center gap-1 rounded-lg border border-[var(--color-rule)] bg-[var(--color-card)] p-1 shadow-sm sm:flex-col">
 
         <ToolbarButton onclick={() => setCanvasState({ mode: CanvasMode.None })} icon={MousePointer2} label='Select' isDisabled={false} isActive={
           canvasState.mode === CanvasMode.None ||
@@ -63,7 +63,7 @@ const Toolbar = ({
 
         <ToolbarButton icon={Pen} label='Pen' isDisabled={false} onclick={() => setCanvasState({ mode: CanvasMode.Pencil })} isActive={canvasState.mode === CanvasMode.Pencil} />
       </div>
-      <div className="bg-white p-1 rounded-md flex flex-col items-center">
+      <div className="flex items-center rounded-lg border border-[var(--color-rule)] bg-[var(--color-card)] p-1 shadow-sm sm:flex-col">
         <ToolbarButton onclick={undo} icon={Undo2} label='Undo' isDisabled={!canUndo} isActive={canUndo} />
 
         <ToolbarButton onclick={redo} icon={Redo2} label='Redo' isDisabled={!canRedo} isActive={canRedo} />

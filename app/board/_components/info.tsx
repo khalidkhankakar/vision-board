@@ -12,19 +12,19 @@ const Info = ({ id }: { id: string }) => {
   const fetcher = () => getBoard(id);
   const { data, isLoading } = useSWR('getBoard', fetcher)
 
-  if (isLoading) return <Skeleton className='absolute h-12 top-2 left-3 shadow-md rounded-md bg-white w-[300px] py-2 px-4' />
+  if (isLoading) return <Skeleton className='absolute left-3 top-3 h-12 w-[min(300px,calc(100vw-96px))] rounded-lg bg-[var(--color-card)] px-4 py-2 shadow-sm' />
 
 
   return (
-    <div className='absolute top-2  flex items-center gap-x-3 left-3 shadow-md rounded-md bg-white py-1 px-2'>
+    <div className='absolute left-3 top-3 z-20 flex max-w-[calc(100vw-96px)] items-center gap-x-2 rounded-lg border border-[var(--color-rule)] bg-[var(--color-card)] px-2 py-1 shadow-sm'>
       <Tip label={'Back to boards'} side='bottom'>
-        <Button className='px-0  flex items-center justify-center' variant={"board"} asChild>
+        <Button className='flex h-10 w-12 items-center justify-center rounded-md px-1 hover:bg-[var(--color-paper-2)]' variant={"board"} asChild>
           <Link href={'/'}>
-            <Image src={'/logo.png'} width={100} height={250} className="h-full w-full" alt="logo" priority />
+            <Image src={'/logo.png'} width={100} height={250} className="h-full w-full object-contain" alt="logo" priority />
           </Link>
         </Button>
       </Tip>
-      <Button variant={'board'}>{data?.title}</Button>
+      <Button className='max-w-[46vw] truncate rounded-md px-3 text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-paper-2)]' variant={'board'}>{data?.title}</Button>
     </div>
   )
 }

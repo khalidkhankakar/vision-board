@@ -28,13 +28,13 @@ const OrgItem = ({
     }
     return (
         <Tip label={name} side='right'>
-        <div className=' opacity-90 hover:opacity-100 trasition duration-100 rounded-md p-1  flex items-center justify-center '>
+        <div className='flex items-center justify-center rounded-lg p-1 opacity-90 transition hover:bg-white/10 hover:opacity-100'>
             <Image src={imageUrl} alt={name}
                 onClick={onClick}
                 width={100}
                 height={100}
-                className={cn('h-10 w-10 rounded-md cursor-pointer ',
-                    isActive && 'ring-2 ring-white'
+                className={cn('h-10 w-10 cursor-pointer rounded-lg object-cover',
+                    isActive && 'ring-2 ring-[var(--color-accent-2)] ring-offset-2 ring-offset-[var(--color-ink)]'
                 )}
 
             />

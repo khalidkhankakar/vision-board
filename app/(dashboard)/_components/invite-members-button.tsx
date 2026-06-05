@@ -13,8 +13,8 @@ const InviteMembersButton = () => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant='secondary' className=' rounded-md  flex items-center justify-center text-lg'>
-                    <Plus className='w-8 h-8 ' />Invite Members</Button>
+                <Button variant='secondary' className='h-10 rounded-lg border border-[var(--color-rule)] bg-[var(--color-paper-2)] px-3 text-sm text-[var(--color-ink)] shadow-none hover:bg-[var(--color-paper-3)] sm:px-4'>
+                    <Plus className='h-4 w-4' /><span className='hidden sm:inline'>Invite Members</span></Button>
             </DialogTrigger>
             <DialogContent className='p-0  bg-transparent border-none'>
                 <DialogHeader>

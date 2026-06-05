@@ -15,15 +15,15 @@ export const metadata: Metadata = {
 
 const DashboardLayout = ({ children }: Readonly<DashboardLayoutProps>) => {
     return (
-        <main className='h-screen flex'>
-            <div className='h-full flex'>
+        <main className='h-screen min-w-0 overflow-hidden bg-[var(--color-paper)] text-[var(--color-ink)] lg:flex'>
+            <div className='hidden h-full shrink-0 border-r border-[var(--color-rule)] bg-[var(--color-ink)] lg:flex'>
                 <Sidebar />
                 <OrgSidebar />
             </div>
-            <div className='w-full'>
+            <div className='flex h-full min-w-0 flex-1 flex-col'>
                 <Navbar />
                 <ModelProvider />
-                
+
                 {children}
             </div>
         </main>

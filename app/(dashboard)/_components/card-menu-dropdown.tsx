@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useRenameModel } from "@/hooks/use-rename-model";
 import { deleteBoard } from "@/lib/query/board.queies";
+import { revalidateBoardsCache } from "@/lib/cache-utils";
 import { useOrganization } from "@clerk/nextjs";
 import { Copy, Pencil, Trash } from "lucide-react";
-import { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
 
 interface CardMenuDropdownProps {
@@ -39,18 +39,8 @@ const CardMenuDropdown = ({ id, title,children }: CardMenuDropdownProps) => {
             if (!organization || !id) return;
             const result = await trigger()
             console.log({ result })
-            // Revalidate the cache for the board's data
-            mutate((key) => {
-                // Match `/api/board/{organizationId}` with:
-                // 1. No query params
-                // 2. Only `search`
-                // 3. Only `favorites`
-                // 4. Both `search` and `favorites`
-                const pattern = new RegExp(
-                  `^/api/board/${organization.id}($|\\?((search=.*&favorites=.*)|(favorites=.*&search=.*)|(search=.*)|(favorites=.*)))`
-                );
-                return pattern.test(key as string);
-              });
+            // Immediately revalidate boards cache after deletion
+            revalidateBoardsCache(organization.id)
         } catch (error) {
             console.error("Error deleting item:", error);
         }
@@ -61,13 +51,13 @@ const CardMenuDropdown = ({ id, title,children }: CardMenuDropdownProps) => {
             <DropdownMenuTrigger asChild>
                {children}
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuContent className="w-48 rounded-lg border-[var(--color-rule)] bg-[var(--color-card)] p-1.5 text-[var(--color-ink)] shadow-lg">
+                <DropdownMenuLabel className="px-2 text-xs text-[var(--color-ink-2)]">Actions</DropdownMenuLabel>
                 <DropdownMenuSeparator />
 
                 {/* Copy Board Link */}
-                <DropdownMenuItem asChild>
-                    <button onClick={handleCopy} className="flex gap-x-2 items-center">
+                <DropdownMenuItem asChild className="rounded-md">
+                    <button onClick={handleCopy} className="flex w-full items-center gap-x-2">
                         <Copy className="h-3 w-3" />
                         <span>Copy board link</span>
                     </button>
@@ -80,19 +70,19 @@ const CardMenuDropdown = ({ id, title,children }: CardMenuDropdownProps) => {
 
                 >
                     <button
-                        className="flex gap-x-3 mx-2 hover:bg-gray-100 w-full items-center"
+                        className="mx-1 flex w-[calc(100%-0.5rem)] items-center gap-x-3 rounded-md px-2 py-1.5 text-sm hover:bg-[var(--color-paper-2)]"
                     >
                         <Trash className="h-4 w-4" />
                         <span>Delete</span>
                     </button>
                 </ConfirmationModel>
 
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem asChild className="rounded-md">
                     <button
                         onClick={() => onOpen(id, title)}
-                        className="flex gap-x-3 mx-2 hover:bg-gray-100 w-full items-center"
+                        className="flex w-full items-center gap-x-3"
                     >
-                        <Pencil />
+                        <Pencil className="h-4 w-4" />
                         <span>Rename</span>
                     </button>
                 </DropdownMenuItem>

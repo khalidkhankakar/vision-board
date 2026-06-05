@@ -38,7 +38,7 @@ const SelectionTools = ({camera, setLastUsedColor}:SelectionToolsProps) => {
 
 
   return (
-    <div className='flex gap-x-2 items-start absolute p-3 rounded-md bg-white shadow-md '
+    <div className='absolute z-30 flex items-start gap-x-2 rounded-lg border border-[var(--color-rule)] bg-[var(--color-card)] p-2 shadow-sm'
     style={{
         transform: `translate(
         calc(${x}px - 50%),
@@ -47,8 +47,8 @@ const SelectionTools = ({camera, setLastUsedColor}:SelectionToolsProps) => {
     >
         <ColorPicker onChange={setFillColor} />
 
-        <Button className='w-8 h-8' variant={'board'} onClick={deleteLayer} asChild>
-            <Trash2 />
+        <Button className='h-8 w-8 rounded-md p-0 text-[var(--color-danger)] hover:bg-[var(--color-danger)]/10' variant={'board'} onClick={deleteLayer}>
+            <Trash2 className='h-4 w-4' />
         </Button>
     </div>
   )

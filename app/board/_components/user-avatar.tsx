@@ -11,11 +11,12 @@ interface UserAvatarProps {
     borderColor?: string;
 }
 const UserAvatar = ({ src, name,  borderColor }: UserAvatarProps) => {
+    const fallback = name?.[0] || 'A'
     return (
         <Tip label={name || "Teammate"} side='bottom' >
-        <Avatar style={{ border: `2px solid ${borderColor}`, cursor: 'pointer' }}>
+        <Avatar className="h-8 w-8 bg-[var(--color-paper-2)] text-xs text-[var(--color-ink)]" style={{ border: `2px solid ${borderColor || 'var(--color-rule)'}`, cursor: 'pointer' }}>
             <AvatarImage src={src} />
-            <AvatarFallback>{name![0] || 'A'}</AvatarFallback>
+            <AvatarFallback>{fallback}</AvatarFallback>
         </Avatar>
         </Tip>
     )

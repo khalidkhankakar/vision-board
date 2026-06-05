@@ -18,8 +18,8 @@ const ToolbarButton = ({
     isDisabled }: ToolbarButtonProps) => {
     return (
         <Tip label={label} side='right'>
-            <Button disabled={isDisabled} onClick={onclick} variant={isActive ?'activeBoard':'board'}>
-                <Icon />
+            <Button disabled={isDisabled} onClick={onclick} variant={isActive ?'activeBoard':'board'} className='h-9 w-9 rounded-md p-0 text-[var(--color-ink-2)] hover:bg-[var(--color-paper-2)] hover:text-[var(--color-accent)] disabled:opacity-40 data-[state=open]:bg-[var(--color-paper-2)]'>
+                <Icon className='h-4 w-4' />
             </Button>
         </Tip>
     )

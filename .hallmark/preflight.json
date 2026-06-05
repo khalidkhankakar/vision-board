@@ -1,0 +1,8 @@
+{
+  "date": "2026-06-05",
+  "font_stack": "Geist + Geist Mono via next/font local files; app/globals.css previously hard-coded Arial",
+  "palette": "shadcn HSL variables in app/globals.css mapped by tailwind.config.ts; Hallmark OKLCH tokens added in tokens.css",
+  "motion": "motion-cut; no framer-motion, motion, gsap, lenis, lottie-react, react-spring, or auto-animate dependency found",
+  "spacing": "Tailwind default spacing with Hallmark 4-point semantic tokens added",
+  "framework": "Next.js 15 app router"
+}

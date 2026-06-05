@@ -7,8 +7,8 @@ import InviteMembersButton from './invite-members-button'
 const Navbar = () => {
 
   return (
-    <div className='h-16 px-3 bg-gray-200 flex gap-x-3 items-center '>
-      <div className='flex-1 '>
+    <div className='flex min-h-16 shrink-0 items-center gap-3 border-b border-[var(--color-rule)] bg-[var(--color-card)] px-3 py-2 shadow-sm sm:px-4'>
+      <div className='min-w-0 flex-1'>
         <SearchBar />
         <div className='block lg:hidden'>
 
@@ -16,19 +16,20 @@ const Navbar = () => {
             elements: {
               rootBox: {
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
                 width: '100%',
-                maxWidth: '300px',
-                fontSize: '18px',
+                maxWidth: '100%',
+                fontSize: '14px',
               },
               organizationSwitcherTrigger: {
-                padding: '6px',
+                padding: '8px 10px',
                 width: '100%',
-                borderRadius: '6px',
-                backgroundColor: '#edf2ef',
-                border: '1px solid #edf2ef',
-                fontSize: '18px',
+                borderRadius: '8px',
+                backgroundColor: 'var(--color-paper-2)',
+                border: '1px solid var(--color-rule)',
+                color: 'var(--color-ink)',
+                fontSize: '14px',
               }
             }
           }} />
@@ -37,7 +38,7 @@ const Navbar = () => {
 
       </div>
 
-      <div className='flex gap-x-2 items-center'>
+      <div className='flex shrink-0 items-center gap-2'>
           <InviteMembersButton />
         <UserButton />
       </div>

@@ -5,7 +5,7 @@ import BoardFooter from './board-footer'
 import { useAuth, useOrganization } from '@clerk/nextjs'
 import useSWRMutation from 'swr/mutation'
 import { handleFavAndUnFav } from '@/lib/query/board.queies'
-import { mutate } from 'swr'
+import { revalidateBoardsCache } from '@/lib/cache-utils'
 import { useState } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Ellipsis } from 'lucide-react'
@@ -40,24 +40,23 @@ const BoardCard = ({
     setIsFav((prev) => !prev)
     if (!id || !userId || !organization) return
     trigger({ userId, boardId: id, orgId: organization.id })
+    // Immediately revalidate boards cache after toggling favorite
+    revalidateBoardsCache(organization.id)
     // TODO: show the toast
-    // .catch((e) => {console.error(e)
-    //   setIsFav(false)
-    // })
-    // .then(() => console.log('done'))
-    mutate(`api/board/${organization.id}`)
   }
 
   return (
-    <div className='group aspect-[5/5] pb-0 p-3 bg-blue-50 rounded-lg relative'>
-      <Image src={'/board.svg'} width={100} height={100} alt="board" className='object-contain w-full' />
-      <div className='absolute top-2 right-2 z-50'>
+    <div className='group relative flex aspect-[5/4] flex-col overflow-hidden rounded-lg border border-[var(--color-rule)] bg-[var(--color-card)] p-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:aspect-[5/5]'>
+      <div className='flex min-h-0 flex-1 items-center justify-center rounded-md bg-[var(--color-paper-2)] p-4'>
+        <Image src={'/board.svg'} width={220} height={220} alt="board" className='h-full max-h-44 w-full object-contain opacity-95 transition group-hover:scale-[1.02]' />
+      </div>
+      <div className='absolute right-3 top-3 z-50'>
         <CardMenuDropdown
           title={title}
           id={id}
         >
-          <button>
-            <Ellipsis />
+          <button className='flex h-8 w-8 items-center justify-center rounded-md border border-[var(--color-rule)] bg-[var(--color-card)]/95 text-[var(--color-ink-2)] shadow-sm transition hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]'>
+            <Ellipsis className='h-4 w-4' />
           </button>
         </CardMenuDropdown>
       </div>
@@ -82,7 +81,7 @@ export default BoardCard
 
 BoardCard.Skeleton = function BoardCardSkeleton() {
   return (
-      <Skeleton className='group aspect-[5/5] bg-blue-50 rounded-lg relative' />
+      <Skeleton className='group aspect-[5/4] rounded-lg bg-[var(--color-paper-2)] sm:aspect-[5/5]' />
   )
 }
 

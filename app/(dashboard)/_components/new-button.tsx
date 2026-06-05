@@ -13,10 +13,10 @@ import Tip from '@/components/shared/tooltip'
 const NewButton = () => {
     return (
         <Dialog>
-            <Tip label={"Create an Orginzation"} side='right'>
+            <Tip label={"Create an organization"} side='right'>
             <DialogTrigger asChild>
-                <button className='bg-blue-100/50 opacity-90 hover:opacity-100 trasition duration-100 rounded-md p-1  flex items-center justify-center h-10 w-10'>
-                    <Plus className='w-8 h-8 ' />
+                <button className='flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/10 text-white shadow-sm transition hover:bg-white/15 focus-visible:bg-white/15'>
+                    <Plus className='h-5 w-5' />
                 </button>
             </DialogTrigger>
             </Tip>

@@ -4,17 +4,17 @@ import React from 'react'
 
 const Loading = () => {
     return (
-        <div className='h-full w-full flex items-center justify-center bg-slate-200 relative'>
-            <Loader className='h-5 w-5 animate-spin' />
-            <Skeleton className='absolute h-12 top-2 left-3 shadow-md rounded-md bg-white w-[300px] py-2 px-4' />
+        <div className='relative flex h-full w-full items-center justify-center bg-[var(--color-canvas)]'>
+            <Loader className='h-5 w-5 animate-spin text-[var(--color-accent)]' />
+            <Skeleton className='absolute left-3 top-3 h-12 w-[min(300px,calc(100vw-96px))] rounded-lg bg-[var(--color-card)] px-4 py-2 shadow-sm' />
 
-            <div className='absolute top-[30%] h-1/3 w-12 left-2 space-y-2 py-2 px-4'>
+            <div className='absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 sm:bottom-auto sm:left-3 sm:top-1/2 sm:-translate-x-0 sm:-translate-y-1/2 sm:flex-col'>
             
-                <Skeleton className="bg-white rounded-md h-28 w-12 " />
-                <Skeleton className="bg-white rounded-md  h-16 w-12" />
+                <Skeleton className="h-11 w-40 rounded-lg bg-[var(--color-card)] sm:h-64 sm:w-11" />
+                <Skeleton className="h-11 w-20 rounded-lg bg-[var(--color-card)] sm:w-11" />
             </div>
 
-            <Skeleton className='absolute h-12 top-2 right-3 shadow-md rounded-md bg-white py-2 px-4 w-[150px]' />
+            <Skeleton className='absolute right-3 top-3 h-12 w-[132px] rounded-lg bg-[var(--color-card)] px-4 py-2 shadow-sm' />
         </div>
     )
 }

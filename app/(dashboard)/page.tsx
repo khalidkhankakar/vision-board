@@ -7,7 +7,7 @@ const Home = async ({searchParams}:{searchParams?:SearchParams}) => {
   const search =  (await searchParams)?.search
 
   return (
-    <div className='h-[calc(100vh-64px)] overflow-y-scroll '>
+    <div className='min-h-0 flex-1 overflow-y-auto overflow-x-clip'>
       <BoardList searchParams={{ search, favorite} }  />
     </div>
   )

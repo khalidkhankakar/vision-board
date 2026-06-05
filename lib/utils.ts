@@ -1,6 +1,5 @@
 import { Camera, Color, Layer, Point, Side, XYHW } from "@/types/canvas";
 import { clsx, type ClassValue } from "clsx"
-import { ReadonlyURLSearchParams } from "next/navigation";
 import React from "react";
 import { twMerge } from "tailwind-merge"
 

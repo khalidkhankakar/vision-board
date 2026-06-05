@@ -257,7 +257,7 @@ const Canvas = ({ id }: { id: string }) => {
   }, [history])
 
   return (
-    <div className='h-full w-full bg-slate-200 relative'>
+    <div className='relative h-full w-full overflow-hidden bg-[var(--color-canvas)]'>
       <Info id={id} />
       <Toolbar canvasState={canvasState} setCanvasState={setCanvasState} canRedo={canRedo} canUndo={canUndo} undo={history.undo} redo={history.redo} />
 
@@ -275,7 +275,7 @@ const Canvas = ({ id }: { id: string }) => {
         onPointerMove={onPointerMove}
         onWheel={onWheel}
         onPointerDown={onPoinerDown}
-        className='w-[100vw] h-[100vh]'>
+        className='h-[100vh] w-[100vw] touch-none'>
         <g
           style={{
             transform: `translate(${camera.x}px ${camera.y}px)`
@@ -300,7 +300,7 @@ const Canvas = ({ id }: { id: string }) => {
             canvasState.mode == CanvasMode.SelectionNet && canvasState.current != null && (
 
               <rect
-                className='fill-blue-500/5 stroke-blue-500 stroke-1'
+                className='fill-[var(--color-accent)]/10 stroke-[var(--color-accent)] stroke-1'
                 x={Math.min(canvasState.origin.x, canvasState.current.x)}
                 y={Math.min(canvasState.origin.y, canvasState.current.y)}
                 width={Math.abs(canvasState.origin.x - canvasState.current.x)}

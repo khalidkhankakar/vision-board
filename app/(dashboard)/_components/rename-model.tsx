@@ -12,9 +12,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { useRenameModel } from "@/hooks/use-rename-model"
 import { renameBoard } from "@/lib/query/board.queies"
+import { revalidateBoardsCache } from "@/lib/cache-utils"
 import { useOrganization } from "@clerk/nextjs"
 import { useEffect, useState } from "react"
-import { mutate } from "swr"
 import useSWRMutation from "swr/mutation"
 
 
@@ -31,21 +31,11 @@ const RenameModel = () => {
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // TODO: Submit form
         if (!organization || !initialValues.id) return;
         const result = await trigger({ title })
         console.log({ result })
-        mutate((key) => {
-            // Match `/api/board/{organizationId}` with:
-            // 1. No query params
-            // 2. Only `search`
-            // 3. Only `favorites`
-            // 4. Both `search` and `favorites`
-            const pattern = new RegExp(
-              `^/api/board/${organization.id}($|\\?((search=.*&favorites=.*)|(favorites=.*&search=.*)|(search=.*)|(favorites=.*)))`
-            );
-            return pattern.test(key as string);
-          });
+        // Immediately revalidate boards cache after renaming
+        revalidateBoardsCache(organization.id)
         onClose();
     }
 

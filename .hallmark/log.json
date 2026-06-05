@@ -1,0 +1,11 @@
+[
+  {
+    "date": "2026-06-05",
+    "scope": "app",
+    "macrostructure": "Workbench",
+    "theme": "custom studio",
+    "theme_axes": "light / geometric-sans / cool",
+    "enrichment": "none",
+    "brief": "Vision Board app UI redesign for consistent responsive dashboard and canvas chrome"
+  }
+]

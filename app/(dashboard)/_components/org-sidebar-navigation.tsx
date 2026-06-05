@@ -10,21 +10,21 @@ const OrgSidebarNavigation = () => {
  
   const favorite = searchParams.get('favorite')
   return (
-    <div className='flex flex-col gap-y-5'>
-        <Button variant={!favorite ? 'secondary' : 'ghost'} className='cursor-pointer' asChild>
-            <Link href={'/'} className='flex py-5 gap-x-2 items-center'>
-            <LayoutDashboard />
-            <span className='text-lg font-semibold'>Team Board</span>
+    <div className='flex flex-col gap-y-2'>
+        <Button variant={!favorite ? 'secondary' : 'ghost'} className='h-11 cursor-pointer justify-start rounded-lg px-3 text-[var(--color-ink)] shadow-none hover:bg-[var(--color-paper-2)]' asChild>
+            <Link href={'/'} className='flex items-center gap-x-2'>
+            <LayoutDashboard className='h-4 w-4' />
+            <span className='text-sm font-medium'>Team Boards</span>
             </Link>
         </Button>
       
-        <Button variant={favorite ? 'secondary' : 'ghost'} className='cursor-pointer' asChild>
+        <Button variant={favorite ? 'secondary' : 'ghost'} className='h-11 cursor-pointer justify-start rounded-lg px-3 text-[var(--color-ink)] shadow-none hover:bg-[var(--color-paper-2)]' asChild>
             <Link href={{
                 pathname:"/",
                 query:{favorite:true}
-            }} className='flex py-5  gap-x-2 items-center'>
-            <Star />
-            <span className='text-lg font-semibold'>Favorite Boards</span>
+            }} className='flex items-center gap-x-2'>
+            <Star className='h-4 w-4' />
+            <span className='text-sm font-medium'>Favorites</span>
             </Link>
         </Button>
     </div>
