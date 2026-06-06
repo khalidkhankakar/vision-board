@@ -83,16 +83,13 @@ export default function LandingPage() {
       <header className="sticky top-0 z-40 border-b border-[var(--color-rule)] bg-[var(--color-card)]/90 backdrop-blur-xl">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3 rounded-full focus-visible:outline-none">
-          <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--color-ink)] bg-[var(--color-accent)]">
-            <Image src="/logo.png" alt="Vision Board" width={36} height={36} className="h-8 w-8 object-contain" priority />
-          </span>
           <span className="text-sm font-semibold tracking-tight sm:text-base">Vision Board</span>
         </Link>
 
         <nav className="hidden items-center gap-1 rounded-full border border-[var(--color-rule)] bg-[var(--color-paper)] p-1 shadow-sm md:flex">
-          <a href="#workspace" className="whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-[var(--color-ink-2)] hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]">Workspace</a>
-          <a href="#workflow" className="whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-[var(--color-ink-2)] hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]">Workflow</a>
-          <a href="#access" className="whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-[var(--color-ink-2)] hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]">Access</a>
+          <Link href="#workspace" className="whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-[var(--color-ink-2)] hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]">Workspace</Link>
+          <Link href="#workflow" className="whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-[var(--color-ink-2)] hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]">Workflow</Link>
+          <Link href="#access" className="whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-[var(--color-ink-2)] hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]">Access</Link>
         </nav>
 
         <div className="flex items-center gap-2">
