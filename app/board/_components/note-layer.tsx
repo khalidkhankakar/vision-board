@@ -35,7 +35,7 @@ const NoteLayerInsert = ({ id, layer, onPointerDown, selectionColor }: NoteLayer
         }
     }, [id])
 
-    const handleDoubleClick = (e: React.PointerEvent) => {
+    const handleDoubleClick = (e: React.MouseEvent) => {
         e.stopPropagation()
         setIsEditing(true)
     }
@@ -59,7 +59,7 @@ const NoteLayerInsert = ({ id, layer, onPointerDown, selectionColor }: NoteLayer
     const padY = tapeH + 8
 
     return (
-        <g style={{ transform: `translate(${x}px, ${y}px)` }}>
+        <g style={{ transform: `translate(${x}px, ${y}px)` }} className='pointer-events-auto'>
             {/* ── Drop shadow filter ── */}
             <defs>
                 <filter id={`shadow-${id}`} x='-10%' y='-10%' width='130%' height='130%'>

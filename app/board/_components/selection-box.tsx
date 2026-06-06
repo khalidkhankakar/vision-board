@@ -37,7 +37,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
             />
 
             {isShowHandles && (
-                <>
+                <g className='pointer-events-auto'>
                     {/* 1 */}
                     <rect
                         x={0}
@@ -188,7 +188,7 @@ export const SelectionBox = memo(({ onResizeHandlePointerDown }: SelectionBoxPro
 
                         }}
                     />
-                </>
+                </g>
             )}
         </>
     )

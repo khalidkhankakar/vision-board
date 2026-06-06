@@ -29,7 +29,12 @@ const Room = ({
         layers: new LiveMap<string, LiveObject<Layer>>(),
         layerIds: new LiveList([]),
         }}
-        initialPresence={{cursor:null, selection:[]}} id={id}>
+        initialPresence={{
+          cursor: null,
+          selection: [],
+          pencilDraft: null,
+          penColor: null,
+        }} id={id}>
         <ClientSideSuspense fallback={fallback}>
           {children}
         </ClientSideSuspense>

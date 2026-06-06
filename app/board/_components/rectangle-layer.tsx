@@ -1,7 +1,8 @@
+import React from 'react'
+import { Rect } from 'react-konva'
+
 import { colorToCSS } from '@/lib/utils'
 import { RectangleLayer } from '@/types/canvas'
-import React from 'react'
-
 
 interface RectangleLayerProps {
     id: string,
@@ -11,25 +12,30 @@ interface RectangleLayerProps {
 }
 
 const RectangleLayerInsert = ({ id, layer, onPointerDown, selectionColor }: RectangleLayerProps) => {
-    const { height, width, x, y,fill } = layer
+    const { height, width, x, y, fill } = layer
     return (
-        <rect
-            className='drop-shadow-md'
-            onPointerDown={(e) => onPointerDown(e, id)}
-            style={{
-                transform: `translate(${x}px, ${y}px)`,
-            }}
-
-            x={0}
-            y={0}
+        <Rect
+            x={x}
+            y={y}
             width={width}
             height={height}
-            strokeWidth={selectionColor ? 2 : 1}
-            fill={fill ? colorToCSS(fill):'#e5e7eb'}
+            fill={fill ? colorToCSS(fill) : '#e5e7eb'}
             stroke={selectionColor || 'transparent'}
-
+            strokeWidth={selectionColor ? 2 : 1}
+            onMouseDown={(e) => {
+                e.cancelBubble = true
+                // Konva event to React.PointerEvent like object
+                onPointerDown(e.evt as unknown as React.PointerEvent, id)
+            }}
+            onMouseEnter={(e) => {
+                const container = e.target.getStage()?.container();
+                if (container) container.style.cursor = 'grab';
+            }}
+            onMouseLeave={(e) => {
+                const container = e.target.getStage()?.container();
+                if (container) container.style.cursor = 'default';
+            }}
         />
-
     )
 }
 

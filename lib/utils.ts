@@ -1,4 +1,4 @@
-import { Camera, Color, Layer, LayerType, Point, Side, XYHW } from "@/types/canvas";
+import { Camera, Color, Layer, LayerType, PathLayer, Point, Side, XYHW } from "@/types/canvas";
 import { clsx, type ClassValue } from "clsx"
 import React from "react";
 import { twMerge } from "tailwind-merge"
@@ -116,7 +116,7 @@ export function getSvgPathFromStroke(stroke: number[][]) {
   if (!stroke.length) return "";
 
   const d = stroke.reduce(
-    (acc, [x, y], i, arr) => {
+    (acc, [x, y], i) => {
       if (i === 0) {
         acc.push("M", x, y);
       } else {

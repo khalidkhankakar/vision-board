@@ -38,7 +38,7 @@ const TextLayerInsert = ({ id, layer, onPointerDown, selectionColor }: TextLayer
         }
     }, [id])
 
-    const handleDoubleClick = (e: React.PointerEvent) => {
+    const handleDoubleClick = (e: React.MouseEvent) => {
         e.stopPropagation()
         setIsEditing(true)
     }
@@ -52,7 +52,7 @@ const TextLayerInsert = ({ id, layer, onPointerDown, selectionColor }: TextLayer
     const textColor = fill ? colorToCSS(fill) : '#1a1a1a'
 
     return (
-        <g style={{ transform: `translate(${x}px, ${y}px)` }}>
+        <g style={{ transform: `translate(${x}px, ${y}px)` }} className='pointer-events-auto'>
             {/* Invisible hit area for pointer events & selection outline */}
             <rect
                 x={0}

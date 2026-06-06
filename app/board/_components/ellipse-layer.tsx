@@ -1,6 +1,8 @@
+import React from 'react'
+import { Ellipse } from 'react-konva'
+
 import { colorToCSS } from '@/lib/utils'
 import { EllipseLayer } from '@/types/canvas'
-import React from 'react'
 
 interface EllipseLayerProps {
     id: string
@@ -9,22 +11,35 @@ interface EllipseLayerProps {
     selectionColor?: string
 }
 
-const EllipseLayerInsert = ({ id, layer, onPointerDown, selectionColor }: EllipseLayerProps) => {
-    const { height, width, x, y, fill } = layer
+const EllipseLayerInsert = ({
+    id,
+    layer,
+    onPointerDown,
+    selectionColor,
+}: EllipseLayerProps) => {
+    const { x, y, width, height, fill } = layer
+
     return (
-        <ellipse
-            className='drop-shadow-md'
-            onPointerDown={(e) => onPointerDown(e, id)}
-            style={{
-                transform: `translate(${x}px, ${y}px)`,
-            }}
-            cx={width / 2}
-            cy={height / 2}
-            rx={width / 2}
-            ry={height / 2}
-            strokeWidth={selectionColor ? 2 : 1}
+        <Ellipse
+            x={x + width / 2}
+            y={y + height / 2}
+            radiusX={width / 2}
+            radiusY={height / 2}
             fill={fill ? colorToCSS(fill) : '#e5e7eb'}
-            stroke={selectionColor || 'transparent'}
+            stroke={selectionColor ?? 'transparent'}
+            strokeWidth={selectionColor ? 2 : 1}
+            onMouseDown={(e) => {
+                e.cancelBubble = true
+                onPointerDown(e.evt as unknown as React.PointerEvent, id)
+            }}
+            onMouseEnter={(e) => {
+                const container = e.target.getStage()?.container();
+                if (container) container.style.cursor = 'grab';
+            }}
+            onMouseLeave={(e) => {
+                const container = e.target.getStage()?.container();
+                if (container) container.style.cursor = 'default';
+            }}
         />
     )
 }
