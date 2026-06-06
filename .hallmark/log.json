@@ -1,5 +1,32 @@
 [
   {
+    "date": "2026-06-06",
+    "scope": "marketing",
+    "macrostructure": "Product Workbench",
+    "theme": "miro-inspired studio",
+    "theme_axes": "light / geometric-sans / warm",
+    "enrichment": "Tier-A CSS product workspace",
+    "brief": "Robust modern landing page for public Vision Board route"
+  },
+  {
+    "date": "2026-06-06",
+    "scope": "marketing",
+    "macrostructure": "Marquee Hero",
+    "theme": "miro-inspired studio",
+    "theme_axes": "light / geometric-sans / warm",
+    "enrichment": "Tier-A CSS canvas mockup",
+    "brief": "Public landing page for Vision Board with protected dashboard moved to /dashboard"
+  },
+  {
+    "date": "2026-06-06",
+    "scope": "app",
+    "macrostructure": "Workbench",
+    "theme": "miro-inspired studio",
+    "theme_axes": "light / geometric-sans / warm",
+    "enrichment": "none",
+    "brief": "Vision Board app rebrand toward modern minimal Miro-like workspace chrome"
+  },
+  {
     "date": "2026-06-05",
     "scope": "app",
     "macrostructure": "Workbench",

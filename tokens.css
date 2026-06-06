@@ -1,20 +1,23 @@
-/* Hallmark · pre-emit critique: P5 H4 E4 S4 R5 V4 */
+/* Hallmark · pre-emit critique: P5 H4 E5 S5 R5 V4 */
 /* Hallmark · genre: modern-minimal · macrostructure: Workbench · design-system: design.md · designed-as-app */
 :root {
-  --color-paper: oklch(97.2% 0.012 88);
-  --color-paper-2: oklch(94.4% 0.018 91);
-  --color-paper-3: oklch(90.2% 0.021 92);
-  --color-ink: oklch(20.5% 0.035 248);
-  --color-ink-2: oklch(42% 0.038 248);
-  --color-ink-3: oklch(56% 0.03 248);
-  --color-rule: oklch(84% 0.025 92);
-  --color-card: oklch(99% 0.006 88);
-  --color-accent: oklch(57% 0.13 205);
-  --color-accent-2: oklch(67% 0.14 155);
-  --color-accent-ink: oklch(98% 0.008 88);
+  --color-paper: oklch(98.8% 0.01 96);
+  --color-paper-2: oklch(96.2% 0.018 96);
+  --color-paper-3: oklch(92.8% 0.028 96);
+  --color-ink: oklch(18% 0.045 268);
+  --color-ink-2: oklch(40% 0.045 268);
+  --color-ink-3: oklch(58% 0.035 268);
+  --color-rule: oklch(86% 0.018 96);
+  --color-card: oklch(99.6% 0.006 96);
+  --color-accent: oklch(83% 0.18 92);
+  --color-accent-2: oklch(55% 0.2 260);
+  --color-accent-3: oklch(69% 0.16 158);
+  --color-accent-ink: oklch(18% 0.045 268);
   --color-danger: oklch(58% 0.2 25);
-  --color-focus: oklch(64% 0.16 205);
-  --color-canvas: oklch(93.5% 0.015 248);
+  --color-focus: oklch(55% 0.2 260);
+  --color-canvas: oklch(95.8% 0.012 96);
+  --color-canvas-dot: oklch(85.5% 0.018 96);
+  --color-shadow: oklch(18% 0.045 268 / 0.12);
 
   --font-display: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   --font-body: var(--font-geist-sans), Arial, Helvetica, sans-serif;
@@ -41,12 +44,14 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
   --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
-  --dur-short: 160ms;
-  --dur-med: 240ms;
+  --dur-short: 140ms;
+  --dur-med: 220ms;
 
   --radius-control: 0.5rem;
   --radius-card: 0.5rem;
   --radius-panel: 0.75rem;
   --radius-pill: 999px;
   --rule-hairline: 1px;
+  --shadow-panel: 0 18px 48px var(--color-shadow);
+  --shadow-card: 0 10px 28px oklch(18% 0.045 268 / 0.08);
 }

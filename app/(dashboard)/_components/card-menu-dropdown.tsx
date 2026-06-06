@@ -29,7 +29,7 @@ const CardMenuDropdown = ({ id, title,children }: CardMenuDropdownProps) => {
 
     // Handle Copy to Clipboard
     const handleCopy = () => {
-        navigator.clipboard.writeText(`${window.location.href}board/${id}`);
+        navigator.clipboard.writeText(`${window.location.origin}/board/${id}`);
         alert("Board link copied to clipboard!"); // Optional feedback for user
     };
 

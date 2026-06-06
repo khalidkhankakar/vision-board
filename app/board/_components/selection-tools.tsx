@@ -41,7 +41,7 @@ const SelectionTools = ({camera, setLastUsedColor}:SelectionToolsProps) => {
 
 
   return (
-    <div className='absolute z-30 flex items-start gap-x-2 rounded-lg border border-[var(--color-rule)] bg-[var(--color-card)] p-2 shadow-sm'
+    <div className='vision-panel absolute z-30 flex items-start gap-x-2 rounded-lg p-2'
     style={{
         transform: `translate(
         calc(${x}px - 50%),

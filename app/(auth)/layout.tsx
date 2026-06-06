@@ -10,7 +10,7 @@ export const metadata:Metadata = {
 
 const AuthLayout = ({children}:Readonly<AuthLayoutProps>) => {
   return (
-    <main className="h-full flex items-center justify-center">
+    <main className="flex h-full items-center justify-center bg-[var(--color-paper)] px-4">
         {children}
     </main>
   )

@@ -11,9 +11,8 @@ const OrgList = () => {
     })
 
     if(!userMemberships || !userMemberships.data?.length) return null
-    console.log(userMemberships.data)
   return (
-    <ul className='mt-4 space-y-2'>
+    <ul className='mt-5 space-y-2'>
         {
             userMemberships.data?.map((org) => (
                 <OrgItem key={org.organization.id} id={org.organization.id} name={org.organization.name} imageUrl={org.organization.imageUrl} />

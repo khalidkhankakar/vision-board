@@ -2,11 +2,12 @@
 import { Button } from '@/components/ui/button'
 import { getBoard } from '@/lib/action'
 
-import Image from 'next/image'
+
 import Link from 'next/link'
 import useSWR from 'swr'
 import Tip from '@/components/shared/tooltip'
 import { Skeleton } from '@/components/ui/skeleton'
+import { ArrowLeftIcon } from 'lucide-react'
 
 const Info = ({ id }: { id: string }) => {
   const fetcher = () => getBoard(id);
@@ -16,11 +17,11 @@ const Info = ({ id }: { id: string }) => {
 
 
   return (
-    <div className='absolute left-3 top-3 z-20 flex max-w-[calc(100vw-96px)] items-center gap-x-2 rounded-lg border border-[var(--color-rule)] bg-[var(--color-card)] px-2 py-1 shadow-sm'>
+    <div className='vision-panel absolute left-3 top-3 z-20 flex max-w-[calc(100vw-96px)] items-center gap-x-2 rounded-lg px-2 py-1'>
       <Tip label={'Back to boards'} side='bottom'>
         <Button className='flex h-10 w-12 items-center justify-center rounded-md px-1 hover:bg-[var(--color-paper-2)]' variant={"board"} asChild>
-          <Link href={'/'}>
-            <Image src={'/logo.png'} width={100} height={250} className="h-full w-full object-contain" alt="logo" priority />
+          <Link href={'/dashboard'}>
+           <ArrowLeftIcon />
           </Link>
         </Button>
       </Tip>

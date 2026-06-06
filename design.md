@@ -13,13 +13,13 @@ modern-minimal
 - Content pages: Long Document with restrained type and no decorative enrichment.
 
 ## Theme
-- `--color-paper`   oklch(97.2% 0.012 88)
-- `--color-paper-2` oklch(94.4% 0.018 91)
-- `--color-ink`     oklch(20.5% 0.035 248)
-- `--color-ink-2`   oklch(42% 0.038 248)
-- `--color-rule`    oklch(84% 0.025 92)
-- `--color-accent`  oklch(57% 0.13 205)
-- `--color-focus`   oklch(64% 0.16 205)
+- `--color-paper`   oklch(98.8% 0.01 96)
+- `--color-paper-2` oklch(96.2% 0.018 96)
+- `--color-ink`     oklch(18% 0.045 268)
+- `--color-ink-2`   oklch(40% 0.045 268)
+- `--color-rule`    oklch(86% 0.018 96)
+- `--color-accent`  oklch(83% 0.18 92)
+- `--color-focus`   oklch(55% 0.2 260)
 
 ## Typography
 - Display: Geist, weight 600, style normal
@@ -54,7 +54,7 @@ that match the same rhythm.
 
 ## What Pages Must Share
 - Geist font stack.
-- Off-white paper, blue-ink text, cyan accent, green secondary accent.
+- Warm white paper, indigo ink, yellow action accent, blue focus accent.
 - 8px radius for cards and controls.
 - Hairline borders with `--color-rule`.
 - Compact button rhythm and immediate focus rings.

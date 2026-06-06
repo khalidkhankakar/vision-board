@@ -13,35 +13,36 @@ body,
 body {
   font-family: var(--font-body);
   background:
-    linear-gradient(135deg, color-mix(in oklch, var(--color-paper-2) 72%, transparent), transparent 38%),
+    radial-gradient(circle at 18% 8%, color-mix(in oklch, var(--color-accent) 28%, transparent), transparent 18rem),
+    linear-gradient(135deg, color-mix(in oklch, var(--color-paper-2) 82%, transparent), transparent 42%),
     var(--color-paper);
 }
 
 @layer base {
   :root {
-    --background: 48 44% 97%;
-    --foreground: 222 42% 13%;
-    --card: 48 48% 99%;
-    --card-foreground: 222 42% 13%;
-    --popover: 48 48% 99%;
-    --popover-foreground: 222 42% 13%;
-    --primary: 196 68% 42%;
-    --primary-foreground: 48 48% 99%;
-    --secondary: 48 34% 91%;
-    --secondary-foreground: 222 42% 13%;
-    --muted: 48 28% 93%;
-    --muted-foreground: 220 12% 43%;
-    --accent: 164 46% 48%;
-    --accent-foreground: 222 42% 13%;
+    --background: 48 52% 98%;
+    --foreground: 241 40% 14%;
+    --card: 48 52% 99%;
+    --card-foreground: 241 40% 14%;
+    --popover: 48 52% 99%;
+    --popover-foreground: 241 40% 14%;
+    --primary: 49 96% 53%;
+    --primary-foreground: 241 40% 14%;
+    --secondary: 48 34% 93%;
+    --secondary-foreground: 241 40% 14%;
+    --muted: 48 28% 94%;
+    --muted-foreground: 236 10% 43%;
+    --accent: 238 78% 52%;
+    --accent-foreground: 48 52% 99%;
     --destructive: 7 72% 49%;
     --destructive-foreground: 48 48% 99%;
-    --border: 45 25% 82%;
-    --input: 45 25% 82%;
-    --ring: 196 68% 42%;
-    --chart-1: 196 68% 42%;
-    --chart-2: 164 46% 48%;
-    --chart-3: 38 78% 54%;
-    --chart-4: 262 38% 50%;
+    --border: 45 22% 84%;
+    --input: 45 22% 84%;
+    --ring: 238 78% 52%;
+    --chart-1: 49 96% 53%;
+    --chart-2: 238 78% 52%;
+    --chart-3: 151 48% 48%;
+    --chart-4: 15 82% 56%;
     --chart-5: 7 72% 49%;
     --radius: 0.5rem;
   }
@@ -92,6 +93,23 @@ body {
     outline: 2px solid var(--color-focus);
     outline-offset: 2px;
   }
+}
+
+.vision-canvas-bg {
+  background-color: var(--color-canvas);
+  background-image:
+    radial-gradient(var(--color-canvas-dot) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--color-rule) 46%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in oklch, var(--color-rule) 46%, transparent) 1px, transparent 1px);
+  background-position: 0 0, 0 0, 0 0;
+  background-size: 20px 20px, 120px 120px, 120px 120px;
+}
+
+.vision-panel {
+  border: 1px solid var(--color-rule);
+  background: color-mix(in oklch, var(--color-card) 96%, transparent);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(18px);
 }
 
 @media (prefers-reduced-motion: reduce) {

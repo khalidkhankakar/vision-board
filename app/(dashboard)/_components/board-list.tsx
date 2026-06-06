@@ -30,7 +30,7 @@ const BoardList = ({ searchParams }: BoardListProps) => {
         : 'Create, open, and organize collaborative drawing spaces.'
 
     const renderHeader = () => (
-        <div className='mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between'>
+        <div className='mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between'>
             <div className='min-w-0'>
                 <h1 className='text-2xl font-semibold tracking-tight text-[var(--color-ink)] sm:text-3xl'>{title}</h1>
                 <p className='mt-1 max-w-2xl text-sm text-[var(--color-ink-2)]'>{subtitle}</p>

@@ -15,7 +15,7 @@ const NewButton = () => {
         <Dialog>
             <Tip label={"Create an organization"} side='right'>
             <DialogTrigger asChild>
-                <button className='flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/10 text-white shadow-sm transition hover:bg-white/15 focus-visible:bg-white/15'>
+                <button className='flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--color-ink)] bg-[var(--color-accent)] text-[var(--color-accent-ink)] shadow-sm transition hover:-translate-y-0.5 hover:bg-[var(--color-accent)]/90 focus-visible:bg-[var(--color-accent)]/90'>
                     <Plus className='h-5 w-5' />
                 </button>
             </DialogTrigger>

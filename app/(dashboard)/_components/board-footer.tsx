@@ -25,8 +25,8 @@ const BoardFooter = ({ id,
                 <p className='mt-1 text-xs leading-5 text-[var(--color-ink-2)]'>
                    by {authorName} <span className='text-[var(--color-rule)]'>/</span> {formatToShortDate(String(createdAt))}</p>
             </div>
-            <button onClick={handleClick} aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'} className='flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[var(--color-rule)] bg-[var(--color-paper)] text-[var(--color-ink-2)] transition hover:bg-[var(--color-paper-2)] hover:text-[var(--color-accent)]'>
-                <Star fill={isFavorite ? 'var(--color-accent)' : 'transparent'} className='h-4 w-4 stroke-1 stroke-[var(--color-accent)]' />
+            <button onClick={handleClick} aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'} className='flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[var(--color-rule)] bg-[var(--color-paper)] text-[var(--color-ink-2)] transition hover:bg-[var(--color-accent)] hover:text-[var(--color-ink)]'>
+                <Star fill={isFavorite ? 'var(--color-accent)' : 'transparent'} className='h-4 w-4 stroke-1 stroke-[var(--color-ink)]' />
             </button>
         </div>
     )

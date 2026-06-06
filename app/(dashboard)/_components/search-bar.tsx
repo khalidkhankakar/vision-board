@@ -23,10 +23,10 @@ const SearchBar = () => {
     }, [router, deboundedSearchTerm])
 
   return (
-    <div className='hidden w-full max-w-xl items-center gap-2 rounded-lg border border-[var(--color-rule)] bg-[var(--color-paper)] px-3 py-1.5 shadow-sm lg:flex'>
+    <div className='hidden w-full max-w-xl items-center gap-2 rounded-full border border-[var(--color-rule)] bg-[var(--color-paper)] px-4 py-1.5 shadow-sm lg:flex'>
      <Search className="h-4 w-4 shrink-0 text-[var(--color-ink-3)]" />
      <Input
-     placeholder="Search your boards..."
+     placeholder="Search boards"
      onChange={(e)=>setSearchTerm(e.target.value)}
      value={searchTerm}
      className='h-9 border-none bg-transparent px-0 text-sm shadow-none outline-none ring-0 placeholder:text-[var(--color-ink-3)] focus-visible:ring-0' /> 

@@ -46,9 +46,11 @@ const BoardCard = ({
   }
 
   return (
-    <div className='group relative flex aspect-[5/4] flex-col overflow-hidden rounded-lg border border-[var(--color-rule)] bg-[var(--color-card)] p-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:aspect-[5/5]'>
-      <div className='flex min-h-0 flex-1 items-center justify-center rounded-md bg-[var(--color-paper-2)] p-4'>
-        <Image src={'/board.svg'} width={220} height={220} alt="board" className='h-full max-h-44 w-full object-contain opacity-95 transition group-hover:scale-[1.02]' />
+    <div className='group relative flex aspect-[5/4] flex-col overflow-hidden rounded-lg border border-[var(--color-rule)] bg-[var(--color-card)] p-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)] sm:aspect-[5/5]'>
+      <div className='vision-canvas-bg relative flex min-h-0 flex-1 items-center justify-center overflow-hidden rounded-md border border-[var(--color-rule)] p-4'>
+        <div className='absolute left-5 top-5 h-12 w-24 rounded-md border border-[var(--color-rule)] bg-[var(--color-card)] shadow-sm' />
+        <div className='absolute bottom-7 right-6 h-16 w-20 rounded-md border border-[var(--color-ink)] bg-[var(--color-accent)] shadow-sm' />
+        <Image src={'/board.svg'} width={220} height={220} alt="board" className='relative h-full max-h-40 w-full object-contain opacity-80 transition group-hover:scale-[1.02]' />
       </div>
       <div className='absolute right-3 top-3 z-50'>
         <CardMenuDropdown

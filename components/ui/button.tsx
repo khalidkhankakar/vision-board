@@ -19,8 +19,8 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        board:"hover:bg-[var(--color-paper-2)] hover:text-[var(--color-accent)]",
-        activeBoard:"bg-[var(--color-accent)]/10 text-[var(--color-accent)] ring-1 ring-[var(--color-accent)]/20",
+        board:"hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]",
+        activeBoard:"bg-[var(--color-accent)] text-[var(--color-accent-ink)] ring-1 ring-[var(--color-ink)]/10",
       },
       size: {
         default: "h-9 px-4 py-2",

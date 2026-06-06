@@ -280,7 +280,7 @@ const Canvas = ({ id }: { id: string }) => {
   }, [layerIds, layers]);
 
   return (
-    <div className='relative h-full w-full overflow-hidden bg-[var(--color-canvas)]'>
+    <div className='vision-canvas-bg relative h-full w-full overflow-hidden'>
       <Info id={id} />
       <Toolbar canvasState={canvasState} setCanvasState={setCanvasState} canRedo={canRedo} canUndo={canUndo} undo={history.undo} redo={history.redo} />
       <SelectionTools
